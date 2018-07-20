@@ -85,18 +85,18 @@ from <Redmine Root>/config/application.rb
 * Make sure you have the right permission to "Manage Issue To Email Settings" in the roles and permission settings in the Redmine Administration menu
 
 * Go to Administration -> Settings -> API
- - Choose Enable REST web service
+  * Choose Enable REST web service
  
 * Go to Administration -> Plugins -> Redmine Issue To Email -> Configure
- - Select Apple- or Thunderbird-compatibilty
- - Select from which user's view the issue should be exported
+  * Select Apple- or Thunderbird-compatibilty
+  * Select from which user's view the issue should be exported
  
 * Go to Projects -> Settings -> Modules and add Issue-To-Email to project
 
 * Go to Projects -> Settings -> Issue-To-Email
-  - Optionally enter IMAP credentials
-  - Optionally enter server script with available variables (in Help)
-  - Optionallly choose status after export
+  * Optionally enter IMAP credentials
+  * Optionally enter server script with available variables (in Help)
+  * Optionallly choose status after export
 
 **Save!**
 
