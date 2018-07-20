@@ -1,0 +1,6 @@
+<%= form_for @issue_to_email_setting, {:url =>  issue_to_email_setting_path(@project, @issue_to_email_setting),
+									 :method => :put,
+									 :html => {:id => "issue_to_email_setting-form" }
+									 } do |f| %>
+<%= render :partial => '/projects/settings/issue_to_email/form', :locals => {:f => f }  %>
+<%- end #form_for %>

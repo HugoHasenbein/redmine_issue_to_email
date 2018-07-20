@@ -1,0 +1,19 @@
+<%- if @issue %>
+  <%- @issue_to_email_setting = @issue.project.issue_to_email_setting %>
+  <li><%= context_menu_link l(:label_issue_to_email_bulk_store), 
+				issue_to_email_store_path( @issue, :back_url => @back ),
+				:class => "issue_to_email",
+				:disabled => !issues_ready_to_export?( [@issue] )
+	  %>
+  </li>
+<%- elsif @issues %>
+  <li><%= context_menu_link l(:label_issue_to_email_bulk_store), 
+				issue_to_email_bulk_store_path(:ids => @issue_ids, 
+											   :back_url => @back
+											 ),
+				:method => :post,
+				:class => "issue_to_email",
+				:disabled => !issues_ready_to_export?( @issues )
+	  %>
+  </li>
+<%- end %>

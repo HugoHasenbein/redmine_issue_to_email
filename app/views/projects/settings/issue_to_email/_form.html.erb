@@ -1,0 +1,29 @@
+<div class="box">
+  <%= error_messages_for 'issue_to_email_setting' %>
+
+  <div class="splitcontentleft">
+	<h3><%= l(:label_issue_to_email_settings_imap_server_settings) %></h3>
+	<%= render :partial => 'projects/settings/issue_to_email/server_settings', :locals => {f: f, issue_to_email_setting: @issue_to_email_setting} %>
+	<%= render :partial => 'projects/settings/issue_to_email/status_after', :locals => {f: f, issue_to_email_setting: @issue_to_email_setting} %>
+  </div>
+
+  <div class="splitcontentright">
+	<h3><%= l(:label_issue_to_email_settings_server_script_settings) %></h3>
+	<%= render :partial => 'projects/settings/issue_to_email/script_settings', :locals => {f: f, issue_to_email_setting: @issue_to_email_setting}  %>
+  </div>
+
+  <div style="clear:both;"></div>
+
+  <%= f.submit l(:label_save), :name => 'save' %> 
+
+
+	<div class="contextual">
+	  <%-if @issue_to_email_setting.id %>
+		<%= link_to l(:button_delete),
+					{ controller: 'issue_to_email_settings', action: 'destroy', issue_to_email_setting_id: @issue_to_email_setting.id, project_id: @project.id, tab: 'issue_to_email_settings' },
+					data: { confirm: l(:text_are_you_sure)}, method: 'delete', class: 'icon icon-del' %>
+	  <%- end %>
+	</div>
+  <div style="clear:both;">&nbsp;</div>
+</div>
+

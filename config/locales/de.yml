@@ -1,0 +1,90 @@
+# encoding: utf-8
+#
+# Redmine plugin to export an issue as a .eml file
+#
+# Copyright © 2018 Stephan Wenzel <stephan.wenzel@drwpatent.de>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+
+de:
+
+  # Project module name
+  project_module_redmine_issue_to_email: "Ticket-zu-Email"
+
+  # Permission settings in Administration->Roles and permissions
+  permission_edit_issue_to_email_settings: "Ticket-zu-Email-Einstellungen bearbeiten"  
+  permission_store_issue_to_email: "Ticket-zu-Email-Exportieren"  
+  
+  # Global plugin settings
+  label_issue_to_email_setting: "Ticket-zu-Email-Anhänge"
+  export_compatibility: "Kompatibilität"
+  label_issue_to_email_export_apple: "Apple (erfordert aktivierte Vorschaubilder)"
+  label_issue_to_email_export_thunderbird: "Thunderbird"
+  label_issue_to_email_export_user: "Email exportieren aus Sicht von"
+
+  ### Help texts
+  text_issue_to_email_example_export_compatibility: "Diese Einstellung bewirkt die Art, wie Inline-Attachments in der Email verlinkt werden"
+
+  # Project settings
+  label_issue_to_email_settings_plural: "Ticket-zu-Email"
+
+  ### IMAP server settings
+  label_issue_to_email_settings_imap_server_settings: "IMAP-Server-Einstellungen"
+  label_issue_to_email_settings_imap_server: "IMAP-Server"
+  
+  field_protocol: "Protokoll"
+  field_host: "Host"
+  field_port: "Port"
+  field_username: "Login"
+  field_password: "Passwort"
+  field_use_ssl: "SSL nutzen"
+  field_ssl_verify: "SSL-Zertifikat prüfen"
+  field_imap_folder: "IMAP Ordner"
+  
+  label_issue_to_email_test_connectivity: "Verbindungsdaten prüfen"
+  label_better_email_not_authorized: "Sie sind in Redmine nicht authorisiert, die Verbindung zu prüfen"
+  text_issue_to_email_imap_successful: "Verbindungsversuch erfolgreich verlaufen"
+  text_no_matching_folder: "Der Ordner \"%{folder}\" wurde nicht gefunden"
+  text_imap_folder_not_selectable: "Der Ordner \"%{folder}\" kann nicht angewählt werden"
+  text_imap_could_not_upload: "Es konnten keine Dateien zm IMAP-Server hochgeladen werden"
+
+  ### Server script settings
+  label_issue_to_email_settings_server_script_settings: "Server-Script-Einstellungen"
+  label_issue_to_email_settings_server_script: "Server-Script"
+  
+  field_server_script: "Server-Script"
+  
+  label_example_issue_to_email_server_script: "Server-Script läuft auf Server mit Rails-Rechten.<br>\nVerfügbare Variablen:<br>\n%f - Dateiname der exportierten .eml-Datei<br>\n%u - Redmine Login<br>\n%p - Projekt Bezeichner<br>\n%s - Ticket-Thema (escaped)<br>\n%id - Ticket ID<br>\n%pid - Projekt ID<br>\n%c - Ticket erstellt am<br>\n%a - Ticket archiviert am"
+  label_issue_to_email_successfully_queued: "Erfolgreich in die Warteschlange zum Ablegen eingereiht."
+  
+  ### Ticket status change before export
+  label_issue_to_email_status_after: "Ticket-Status vor Export ändern auf"
+  label_issue_to_email_no_change_option: "keine Änderung"
+  
+  label_issue_to_email_not_configured: "Tickets Exportieren wurde nicht konfiguriert."
+  issue_to_email_cannot_store: "Ticket kann nicht exportiert werden, weil Statusänderung auf %{status} nicht zulässig ist."
+  
+  label_issue_to_email_stored: "Als Email abgelegt"
+  
+  # Context menu
+  label_issue_to_email_bulk_store: "Exportieren"
+  
+  # Issue amendments
+  label_added_time_on: "Von %{author} am %{on} aktualisiert"
+
+  # Common
+  label_save: "Speichern"
+  label_empty: "-leer-"

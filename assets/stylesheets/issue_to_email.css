@@ -1,0 +1,16 @@
+/* ------------------------- context menue ------------------------------------------- */
+
+a.issue_to_email {
+	padding: 0px 0px 0px 17px;
+}
+
+a.issue_to_email.disabled {
+	padding: 0px 0px 0px 17px;
+	opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+a.issue_to_email:before {
+	content: '\1f6e2';
+	margin: 0px 0px 0px -17px;
+}

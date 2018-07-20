@@ -1,0 +1,15 @@
+<fieldset class="box tabular">
+<legend><%= l(:label_issue_to_email_settings_server_script) %></legend>
+
+  <%= labelled_fields_for :issue_to_email_setting, issue_to_email_setting do |setting_fields| %>
+    <p><%= setting_fields.text_area :server_script, :value => issue_to_email_setting.server_script %>
+	  <a class='icon icon-help' href='#' title='<%= "#{l(:label_help)}" %>' onclick='$("#help_issue_to_email_server_script").toggle(); return false;'><%= l(:label_help) %></a>
+	  <br>
+	  <span id="help_issue_to_email_server_script" class="info" style="display: none;">
+		<em class="info"><%= l(:label_example_issue_to_email_server_script).html_safe %></em>
+	  </span>
+    </p>
+  <%- end # labelled_fields_for %>
+
+</fieldset>
+

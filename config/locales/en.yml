@@ -1,0 +1,90 @@
+# encoding: utf-8
+#
+# Redmine plugin to export an issue as a .eml file
+#
+# Copyright © 2018 Stephan Wenzel <stephan.wenzel@drwpatent.de>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+
+en:
+
+  # Project module name
+  project_module_redmine_issue_to_email: "Issue To Email"
+
+  # Permission settings in Administration->Roles and permissions
+  permission_edit_issue_to_email_settings: "Edit Issue To Email settings"  
+  permission_store_issue_to_email: "Export Issue To Email"  
+  
+  # Global plugin settings
+  label_issue_to_email_setting: "Issue To Email attachments"
+  export_compatibility: "Compatibility"
+  label_issue_to_email_export_apple: "Apple (requires aktivated thumbnails)"
+  label_issue_to_email_export_thunderbird: "Thunderbird"
+  label_issue_to_email_export_user: "Email as views by"
+
+  ### Help texts
+  text_issue_to_email_example_export_compatibility: "These settings effect how wie inline-attachments within the email"
+
+  # Project settings
+  label_issue_to_email_settings_plural: "Issue To Email"
+
+  ### IMAP server settings
+  label_issue_to_email_settings_imap_server_settings: "IMAP-server settings"
+  label_issue_to_email_settings_imap_server: "IMAP-server"
+  
+  field_protocol: "Protocol"
+  field_host: "Host"
+  field_port: "Port"
+  field_username: "Login"
+  field_password: "Password"
+  field_use_ssl: "Use SSL"
+  field_ssl_verify: "Verify SSL-certificate"
+  field_imap_folder: "IMAP folder"
+  
+  label_issue_to_email_test_connectivity: "Test connectivity"
+  label_better_email_not_authorized: "You are not authorized to test connectivitsy"
+  text_issue_to_email_imap_successful: "Connection successfully established"
+  text_no_matching_folder: "Folder \"%{folder}\" not found"
+  text_imap_folder_not_selectable: "Folder \"%{folder}\" cannot be selected"
+  text_imap_could_not_upload: "No files could be uploaded to the IMAP-Server"
+
+  ### Server script settings
+  label_issue_to_email_settings_server_script_settings: "Server-script settings"
+  label_issue_to_email_settings_server_script: "Server-Script"
+  
+  field_server_script: "Server-Script"
+  
+  label_example_issue_to_email_server_script: "Server-Script runs on server with Rails permissions.<br>\nAvailable variables:<br>\n%f - Filename of exported .eml-file<br>\n%u - Redmine Login<br>\n%p - Project identifier<br>\n%s - Issue-subjet (escaped)<br>\n%id - Issue ID<br>\n%pid - Project ID<br>\n%c - Issue created on<br>\n%a - Issue archived an"
+  label_issue_to_email_successfully_queued: "Erfolgreich in die Warteschlange zum Ablegen eingereiht."
+  
+  ### Ticket status change before export
+  label_issue_to_email_status_after: "Change issue-status before export to"
+  label_issue_to_email_no_change_option: "no change"
+  
+  label_issue_to_email_not_configured: "Export issues not configured"
+  issue_to_email_cannot_store: "Issue cannot be exported because status change to %{status} is not permitted."
+  
+  label_issue_to_email_stored: "Stored as email"
+  
+  # Context menu
+  label_issue_to_email_bulk_store: "Export"
+  
+  # Issue amendments
+  label_added_time_on: "Updated by %{author} on %{on}"
+
+  # Common
+  label_save: "Save"
+  label_empty: "-empty-"

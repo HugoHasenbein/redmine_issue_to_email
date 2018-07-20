@@ -1,0 +1,68 @@
+<fieldset class="box tabular">
+<legend><%= l(:label_issue_to_email_settings_imap_server) %></legend>
+  <script type="text/javascript" charset="utf-8">
+    function changeIssueToEmailServerSettings(element) {
+
+      if (element.value == 'imap') {
+        $('#issue_to_email_server_settings').show();
+        $('#issue_to_email_imap_settings').show();
+        $('#issue_to_email_host_settings').show();
+      }
+
+      if (element.value == '') {
+        $('#issue_to_email_server_settings').hide();
+        $('#issue_to_email_imap_settings').hide();
+        $('#issue_to_email_host_settings').hide();
+      }
+    }
+  </script>
+  <%= labelled_fields_for :issue_to_email_setting, issue_to_email_setting do |setting_fields| %>
+  
+	<p><%= setting_fields.select(:protocol, options_for_select([['', ""], ["imap", "imap"]], issue_to_email_setting.protocol), {}, {:onchange => "changeIssueToEmailServerSettings(this)"} ) %></p>
+
+	<div id="issue_to_email_server_settings" <%= issue_to_email_setting.protocol.blank? ? "style='display: none;'".html_safe : ''  %>>
+
+	  <p><%= setting_fields.text_field :host, :value => issue_to_email_setting.host %></p>
+	  <p><%= setting_fields.text_field :port, :value => issue_to_email_setting.port %></p>
+	  <p><%= setting_fields.text_field :username, :value => issue_to_email_setting.username %></p>
+
+	  <p>
+		<%= content_tag 'label', l(:field_password), :id => "issue_to_email_password_label", :style => (issue_to_email_setting.username.blank? ? 'display:none;' : nil ) %>
+		<%= link_to_function( image_tag('edit.png'), '$("#issue_to_email_password_label").hide(); $(this).hide(); $("#issue_to_email_password_field").show()' ) unless issue_to_email_setting.username.blank? %>
+		<%= content_tag 'span', :id => "issue_to_email_password_field", :style => (issue_to_email_setting.username.blank? ? nil : 'display:none;') do %>
+		  <%= setting_fields.password_field :password, :value => issue_to_email_setting.password %>
+		<% end %>
+	  </p>
+
+	  <p><%= setting_fields.check_box :use_ssl %></p>
+	  <p><%= setting_fields.check_box :ssl_verify %></p>
+	
+	  <span id="issue_to_email_imap_settings" <%= issue_to_email_setting.protocol != 'imap' ? "style='display: none;'".html_safe : ''  %> >
+		<p><%= setting_fields.text_field :imap_folder, :value => issue_to_email_setting.imap_folder %></p>
+	  </span>
+
+    <span id="issue_to_email_test_connectivity">
+	  <p> 
+		<label class="icon icon-email">
+		  <%= link_to l(:label_issue_to_email_test_connectivity), "#",
+					  :remote => true,
+					  :onclick => "issueToEmailJsForm('#{issue_to_email_test_imap_path(:feedback_message_area => 'issue_to_email_test_connectivity', :project_id => @project.id)}',  $('#issue_to_email_setting-form'))",
+					  :class => "" %> 
+	    </label>
+	  </p>
+	  <div id="issue_to_email_test_connectivity"></div>
+
+	  <%= javascript_include_tag "issue_to_email", :plugin => "redmine_issue_to_email" %>
+
+    </span> <!-- test connectivity -->
+	 
+	</div> <!-- Server settings -->
+	
+	<input type="hidden" name="id" value="<%= params[:id] %>">
+	<input type="hidden" name="issue_to_email_setting_id" value="<%= params[:issue_to_email_setting_id] %>">
+	<input type="hidden" name="tab" value="issue_to_email_settings">
+		
+  <%- end # labelled_fields_for %>
+
+</fieldset>
+

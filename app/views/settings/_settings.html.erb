@@ -1,0 +1,24 @@
+<fieldset class="box tabular settings"><legend><%= l(:label_issue_to_email_setting) %></legend>
+  <p>  
+	<label class="block">
+	  <%= radio_button_tag 'settings[export_compatibility]', 1, (settings["export_compatibility"] == "1" ) %>
+	  <%= l(:label_issue_to_email_export_apple)  %>
+	</label>
+	<label class="block">
+	  <%= radio_button_tag 'settings[export_compatibility]', 2, (settings["export_compatibility"] == "2" ) %>
+	  <%= l(:label_issue_to_email_export_thunderbird)  %>
+	</label>
+	<a class='icon icon-help' href='#' title='<%= "#{l(:label_help)}" %>' onclick='$("#help_issue_to_email_export_compatibility").toggle(); return false;'><%= l(:label_help) %></a>
+	<br>
+	<span id="help_issue_to_email_export_compatibility" class="info" style="display: none;">
+	  <em class="info"><%= l(:text_issue_to_email_example_export_compatibility) %></em>
+	</span>
+  </p>
+</fieldset>
+
+<fieldset class="box tabular settings"><legend><%= l(:label_issue_to_email_export_user) %></legend> 
+  <p>
+	<label"><%= l(:label_user) %></label>
+	<%= select_tag 'settings[export_user]', options_for_select(User.all.collect {|t| [t.name, t.id.to_s]}, settings["export_user"].to_i).html_safe %>
+  </p>
+</fieldset>
