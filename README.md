@@ -80,7 +80,7 @@ to <Redmine Root>/config/application.rb
 
 from <Redmine Root>/config/application.rb
 
-3. restart server f.i.  `sudo /etc/init.s/apache2 restart`
+4. restart server f.i.  `sudo /etc/init.s/apache2 restart`
 
 ### Use
 
