@@ -56,7 +56,7 @@ Plugin for Redmine. With only **one click** bulk export issues to email containi
 
 `bundle exec rake redmine:plugins:migrate RAILS_ENV=production NAME=redmine_issue_to_email`
 
-3. Optionally add
+3. optionally add
 
 `config.active_job.queue_adapter = :sucker_punch` 
 

@@ -68,7 +68,7 @@ en:
   field_server_script: "Server-Script"
   
   label_example_issue_to_email_server_script: "Server-Script runs on server with Rails permissions.<br>\nAvailable variables:<br>\n%f - Filename of exported .eml-file<br>\n%u - Redmine Login<br>\n%p - Project identifier<br>\n%s - Issue-subjet (escaped)<br>\n%id - Issue ID<br>\n%pid - Project ID<br>\n%c - Issue created on<br>\n%a - Issue archived an"
-  label_issue_to_email_successfully_queued: "Erfolgreich in die Warteschlange zum Ablegen eingereiht."
+  label_issue_to_email_successfully_queued: "Successfully queued for export."
   
   ### Ticket status change before export
   label_issue_to_email_status_after: "Change issue-status before export to"
