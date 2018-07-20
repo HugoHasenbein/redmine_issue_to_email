@@ -5,42 +5,42 @@ Plugin for Redmine. With only **one click** bulk export issues to email containi
 
 * Save issues to a long term storage IMAP database for documentation purposes
 * Add issues to custom software document management systems
-* Presreve issues for a time after Redmine
+* Preserve issues for a time after Redmine
   
 […] 
 
 ### Features
 
-* Keeps Theme Style
+* Keeps theme style
 * Email issues look like real issues
 * Inline all CSS
 * Attachments are kept iniline
- - Supports Apple Mail inline attachments style 
- - Supports Thunderbird (also Outlook) inline attachments style
+  * Supports Apple Mail inline attachments style 
+  * Supports Thunderbird (also Outlook) inline attachments style
 * Export permission setting
 * Export as seen by selectable user 
 * Store to IMAP
- - Save to IMAP folder
- - SSL 
+  * Save to IMAP folder
+  * SSL 
 * Store to script
- - Call custom script with following variables 
- - %f - Filename of exported .eml-file
- - %u - Redmine Login
- - %p - Project identifier
- - %s - Issue-subjet (escaped)
- - %id - Issue ID
- - %pid - Project ID
- - %c - Issue crrated on
- - %a - Issue archived an
+  * Call custom script with following variables 
+    * %f - Filename of exported .eml-file
+    * %u - Redmine Login
+    * %p - Project identifier
+    * %s - Issue-subjet (escaped)
+    * %id - Issue ID
+    * %pid - Project ID
+    * %c - Issue created on
+    * %a - Issue archived an
 * Change issue status on export
 * Keep issue detail notice "stored as email"
 * Call from context menu
 * Bulk export
-* Background exportt (if sucker punch is activated in application.rb)
+* Background export (if 'sucker punch' is activated in application.rb)
 * Honors workflow permissions
 * Honors roles and permisions
- - Edit settings permissions
- - Export permissions
+  * Edit settings permissions
+  * Export permissions
 * Inherits settings from parent project unless self defined settings
 * Global plugin settings
   
