@@ -1,5 +1,5 @@
 # redmine_issue_to_email
-Plugin for Redmine. With only **one click** bulk export issues to email containing all attachments as email attachments.
+Plugin for Redmine. With only **one click** bulk export issues to email containing all attachments as email attachments. Email issues look like real issue with clickable attachments.
 
 ### Use case(s)
 
@@ -17,6 +17,8 @@ Plugin for Redmine. With only **one click** bulk export issues to email containi
 * Attachments are kept iniline
   * Supports Apple Mail inline attachments style 
   * Supports Thunderbird (also Outlook) inline attachments style
+* Keeps all issue attributes and custom field values in email custom headers, so long-term email storage clients can sort by attributes
+* Emails get issue ID as email message ID, so email clients relate related issues to each other
 * Export permission setting
 * Export as seen by selectable user 
 * Store to IMAP
@@ -88,7 +90,7 @@ from <Redmine Root>/config/application.rb
   * Choose Enable REST web service
  
 * Go to Administration -> Plugins -> Redmine Issue To Email -> Configure
-  * Select Apple- or Thunderbird-compatibilty
+  * Select Apple- or Thunderbird-compatibilty (important - both email clients behave differently)
   * Select from which user's view the issue should be exported
  
 * Go to Projects -> Settings -> Modules and add Issue-To-Email to project
