@@ -54,6 +54,8 @@ Plugin for Redmine. With only **one click** bulk export issues to email containi
 
 2. go to redmine root folder
 
+`bundle install`
+
 `bundle exec rake redmine:plugins:migrate RAILS_ENV=production NAME=redmine_issue_to_email`
 
 3. optionally add
