@@ -1,6 +1,8 @@
 # redmine_issue_to_email
 Plugin for Redmine. With only **one click** bulk export issues to email containing all attachments as email attachments. Email issues look like real issue with clickable attachments.
 
+![PNG that represents a quick overview](/doc/Overview.gif)
+
 ### Use case(s)
 
 * Save issues to a long term storage IMAP database for documentation purposes
