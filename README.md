@@ -50,9 +50,7 @@ Plugin for Redmine. With only **one click** bulk export issues to email containi
   
 ### Install
 
-1. go to plugins folder
-
-`git clone https://github.com/HugoHasenbein/redmine_issue_to_email.git`
+1. download plugin and copy plugin folder redmine_issue_to_email go to Redmine's plugins folder 
 
 2. go to redmine root folder
 
@@ -60,13 +58,13 @@ Plugin for Redmine. With only **one click** bulk export issues to email containi
 
 `bundle exec rake redmine:plugins:migrate RAILS_ENV=production NAME=redmine_issue_to_email`
 
-3. optionally add
+3. optionally add to <Redmine Root>/config/application.rb
 
 `config.active_job.queue_adapter = :sucker_punch` 
 
-to <Redmine Root>/config/application.rb
+4. restart server f.i.  
 
-4. restart server f.i.  `sudo /etc/init.s/apache2 restart`
+`sudo /etc/init.d/apache2 restart`
 
 ### Uninstall
 
@@ -74,17 +72,17 @@ to <Redmine Root>/config/application.rb
 
 `bundle exec rake redmine:plugins:migrate RAILS_ENV=production NAME=redmine_issue_to_email VERSION=0`
 
-2. go to plugins folder
+2. go to plugins folder, delete plugin folder redmine_issue_to_email
 
 `rm -r redmine_issue_to_email`
 
-3. delete 
+3. delete from <Redmine Root>/config/application.rb
 
 `config.active_job.queue_adapter = :sucker_punch` 
 
-from <Redmine Root>/config/application.rb
+4. restart server f.i.  
 
-4. restart server f.i.  `sudo /etc/init.s/apache2 restart`
+`sudo /etc/init.d/apache2 restart`
 
 ### Use
 
@@ -117,4 +115,11 @@ Now you can right click an issue or on many issues at a time in the issue index 
 
 ### Change-Log
 
+* **1.0.1** 
+  * added security measures against unauthorized access
+  * added redirect to login for unauthorized access
+  * corrected typos in localization strings
+  * added conversion of attachment urls next to present conversion of attachment paths
+  * added feature to allow for empty host string in global Redmine settings
+  
 * **1.0.0** running on Redmine 3.4.6

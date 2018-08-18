@@ -19,7 +19,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-
 module RedmineIssueToEmail
   module Patches
     module IssuesControllerPatch
@@ -109,7 +108,13 @@ module RedmineIssueToEmail
           respond_to do |format|
           
              format.eml  {
-               send_data issue_to_email(@issue, :key => params[:key]), :type => 'message/rfc822', :filename => "#{@issue.project.identifier}-#{@issue.id}.eml" 
+Rails.logger.info ".........hier 1"
+              issue_email = issue_to_email(@issue, :key => params[:key])
+Rails.logger.info ".............issue: #{@issue}"
+Rails.logger.info ".............params[:key]: #{params[:key]}"
+Rails.logger.info ".............issue_email[:key]: #{issue_email}"
+              
+              send_data issue_email, :type => 'message/rfc822', :filename => "#{@issue.project.identifier}-#{@issue.id}.eml" 
                _rendered = true
              }
              

@@ -36,8 +36,9 @@ module RedmineIssueToEmail
           # ------------------------------------------------------------------------------#
           def issue_to_email( issue, assoc={} )
          
+            archive_user        = User.find_by_api_key(assoc[:key]) || User.current
             email               = issue_base_email( issue )
-            issue_html          = download_issue( issue, assoc[:key] )
+            issue_html          = download_issue( issue, archive_user.api_key )
             issue_html          = replace_issue_attachment_links_with_cid( issue, issue_html )
             
             issue_html          = inline_css_style( issue_html )
@@ -52,7 +53,7 @@ module RedmineIssueToEmail
             # therefore, we keep a global_index by which we add the attachments
             #
             @global_index = 0
-            email         = add_issue_attachments_to_email( email, issue )
+            email         = add_issue_attachments_to_email( email, issue, archive_user.api_key )
                         
             #
             # careful: the to_s-function causes message_id to be reinstantiated
@@ -102,6 +103,7 @@ module RedmineIssueToEmail
             #
             # set mail headers to issue attribute values
             #
+            email.header['X-Redmine-Host'] =              Setting.host_name
             email.header['X-Redmine-Project']=            issue.project.identifier
             email.header['X-Redmine-Status']=             issue.status_id.to_s
             email.header['X-Redmine-Priority']=           issue.priority_id.to_s
@@ -123,7 +125,7 @@ module RedmineIssueToEmail
             end
             
             # 
-            # keep export / archove time
+            # keep export / archive time
             #
             Time.zone = User.current.pref['time_zone'].presence || Rails.application.config.time_zone.presence || "UTC"
             email.header['X-Redmine-Export-Time']= DateTime.now.strftime("%d. %b %Y %H:%M:%S (%Z)")
@@ -180,7 +182,13 @@ module RedmineIssueToEmail
             
             # full transform css to inline css 
             issue_doc.keep_uninlinable_css = true
-            issue_doc.url_options = {host: "#{Setting[:host_name]}", protocol: "#{Setting[:protocol]}"} 
+            if Setting[:host_name].present? 
+              issue_doc.url_options = {host: "#{Setting[:host_name]}", protocol: "#{Setting[:protocol]}"} 
+            else
+              @guessed_host_and_path = request.host_with_port.dup
+              @guessed_host_and_path << ('/'+ Redmine::Utils.relative_url_root.gsub(%r{^\/}, '')) unless Redmine::Utils.relative_url_root.blank?
+              issue_doc.url_options = {host: @guessed_host_and_path, protocol: "#{Setting[:protocol]}"} 
+            end #if
             issue_html = issue_doc.transform
             
             issue_html
@@ -236,21 +244,48 @@ module RedmineIssueToEmail
                   issue_html.gsub!(pattern,  "src='cid:#{issue_attachment.id}'")
               end
               
+              if Setting[:host_name].present?
+                protocol_host_name_pattern = Regexp.escape("#{Setting[:protocol]}://#{Setting[:host_name]}")
+              else
+                guessed_host_and_path = request.host_with_port.dup
+                guessed_host_and_path << ('/'+ Redmine::Utils.relative_url_root.gsub(%r{^\/}, '')) unless Redmine::Utils.relative_url_root.blank?
+                protocol_host_name_pattern = Regexp.escape("#{Setting[:protocol]}://#{guessed_host_and_path}")
+              end #if
+
               #
-              # replace attachment urls (url structure likely highly redmine version specific)
+              # replace attachment paths (path structure is likely highly redmine version specific)
               #
-              url = "\/attachments\/#{issue_attachment.id}\/#{URI.escape(issue_attachment.filename)}[^\"^\']*"
+              path = "\/attachments/#{issue_attachment.id}\/#{URI.escape(issue_attachment.filename)}[^\"^\']*"
+              pattern1 = /href=(?:"#{path}"|'#{path}')/i
+              pattern2 = /src=(?:"#{path}"|'#{path}')/i
+              issue_html.gsub!(pattern1,  "href='cid:#{issue_attachment.id}'")
+              issue_html.gsub!(pattern2,  "src='cid:#{issue_attachment.id}'")
+              
+              #
+              # replace attachment urls (url structure is likely highly redmine version specific)
+              # reuse path variable from above
+              #
+              url = protocol_host_name_pattern + path
               pattern1 = /href=(?:"#{url}"|'#{url}')/i
               pattern2 = /src=(?:"#{url}"|'#{url}')/i
               issue_html.gsub!(pattern1,  "href='cid:#{issue_attachment.id}'")
               issue_html.gsub!(pattern2,  "src='cid:#{issue_attachment.id}'")
               
               #
-              # replace attachment download urls (url structure likely highly redmine version specific)
+              # replace attachment download paths (path structure is likely highly redmine version specific)
               #
-              url = "\/attachments\/download\/#{issue_attachment.id}\/#{URI.escape(issue_attachment.filename)}[^\"^\']*"
+              path = "\/attachments\/download\/#{issue_attachment.id}\/#{URI.escape(issue_attachment.filename)}[^\"^\']*"
+              pattern = /href=(?:"#{path}"|'#{path}')/i
+              issue_html.gsub!(pattern,  "href='cid:#{issue_attachment.id}'")
+              
+              #
+              # replace attachment download urls (url structure is likely highly redmine version specific)
+              # reuse path variable from above
+              #
+              url = protocol_host_name_pattern + path
               pattern = /href=(?:"#{url}"|'#{url}')/i
               issue_html.gsub!(pattern,  "href='cid:#{issue_attachment.id}'")
+
             end #do
             issue_html
           end #def
@@ -300,12 +335,14 @@ module RedmineIssueToEmail
         
         
           # ------------------------------------------------------------------------------#
-          def add_issue_attachments_to_email (email, issue )
+          def add_issue_attachments_to_email (email, issue, key )
+         
+            archive_user = User.find_by_api_key(key)
         
             #
             # first add issue attachments to email
             #
-            if issue.attachments.length > 0    
+            if issue.attachments.length > 0 && archive_user && issue.attachments_visible?(archive_user) 
               issue.attachments.each_with_index do |issue_attachment, index|
                 #
                 # we must mask text/html and text/plain, because .txt and .html files 
@@ -338,7 +375,7 @@ module RedmineIssueToEmail
                 #
             
                 when '0', '2', '3' # experimental, thunderbird and outlook
-                  if issue.attachments.length > 0    
+                  if issue.attachments.length > 0 && archive_user && issue.attachments_visible?(archive_user) 
                     issue.attachments.each_with_index do |issue_attachment, index|
             
                       #

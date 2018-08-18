@@ -22,6 +22,7 @@
 Rails.configuration.to_prepare do
 
   # require patches
+  require 'redmine_issue_to_email/patches/application_controller_patch'
   require 'redmine_issue_to_email/patches/application_helper_patch'
   require 'redmine_issue_to_email/patches/projects_helper_patch'
   require 'redmine_issue_to_email/patches/project_patch'

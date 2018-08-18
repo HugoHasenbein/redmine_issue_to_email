@@ -55,3 +55,14 @@ Redmine::Plugin.register :redmine_issue_to_email do
 end
 
 require "redmine_issue_to_email"
+
+### Change-Log
+
+# * **1.0.1** 
+#   * added security measures against unauthorized access
+#   * added redirect to login for unauthorized access
+#   * corrected typos in localization strings
+#   * added conversion of attachments urls next to present conversion of attachment paths
+#   * added feature to allow for empty host string in global Redmine settings
+#   
+# * **1.0.0** running on Redmine 3.4.6

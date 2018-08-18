@@ -31,7 +31,7 @@ en:
   # Global plugin settings
   label_issue_to_email_setting: "Issue To Email attachments"
   export_compatibility: "Compatibility"
-  label_issue_to_email_export_apple: "Apple (requires aktivated thumbnails)"
+  label_issue_to_email_export_apple: "Apple (requires activated thumbnails)"
   label_issue_to_email_export_thunderbird: "Thunderbird"
   label_issue_to_email_export_user: "Email as views by"
 
